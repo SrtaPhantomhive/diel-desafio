@@ -18,7 +18,7 @@
             <thead>
                 <tr class="text-center">
                     <th>Título</th>
-                    <th>Marcador</th>
+                    <th>Prioridade</th>
                     <th>Início</th>
                     <th>Fim</th>
                     <th>Salvar</th>
@@ -32,7 +32,12 @@
                         <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
                     </td>
                     <td>
-                        <input type="color" [(ngModel)]="event.color!.primary" (change)="refresh.next()" />
+                        <select name="selMarcador" id="selMarcador" class="form-control">
+                            <option value="#E46161">Urgente</option>
+                            <option value="#F1B963">Alta</option>
+                            <option value="#F8F398">Média</option>
+                            <option value="#CBF078">Baixa</option>
+                        </select>
                     </td>
                     <td>
                         <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start"
@@ -45,7 +50,7 @@
                             [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
                     </td>
                     <td>
-                        <button class="btn btn-outline-success" (click)="deleteEvent(event)">
+                        <button class="btn btn-outline-success" (click)="saveEvent(event)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-check-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

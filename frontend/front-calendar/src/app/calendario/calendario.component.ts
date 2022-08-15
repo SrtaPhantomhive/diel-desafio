@@ -25,6 +25,8 @@ import {
 import { EventColor } from 'calendar-utils';
 import { EventsService } from '../events.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -81,22 +83,9 @@ export class CalendarioComponent {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    // {
-    //   start: new Date(),
-    //   end: new Date(),
-    //   title: 'A 3 day event',
-    //   color: { ...colors['yellow'] },
-    //   actions: this.actions,
-    //   allDay: true,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true,
-    //   },
-    //   draggable: true,
-    // },
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -140,6 +129,7 @@ export class CalendarioComponent {
     this.events = [
       ...this.events,
       {
+        id: '',
         title: 'Novo evento',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
@@ -155,7 +145,56 @@ export class CalendarioComponent {
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
+    let id = eventToDelete.id
+    if (id != "") {
+      this.eventService.delete(id).subscribe();
+    }
     this.events = this.events.filter((event) => event !== eventToDelete);
+  }
+  saveEvent(eventToSave: CalendarEvent) {
+    console.log(eventToSave)
+    if (eventToSave.title.trim() == "") {
+      Swal.fire({
+        title: 'Título Inválido!',
+        text: 'Por favor, insira o título do evento',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#0DD2A5'
+      });
+
+      return;
+    }
+    if (eventToSave.end! < eventToSave.start) {
+      Swal.fire({
+        title: 'Atenção!',
+        text: 'A data de expiração do evento deve ser superior a data de início.',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#0DD2A5'
+      });
+      return;
+    }
+    if (eventToSave.id == "") {
+      this.eventService.create(eventToSave).subscribe(res => {
+        eventToSave.id = res.id;
+      });
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'O evento foi adicionado com sucesso.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    } else {
+      this.eventService.update(eventToSave.id, eventToSave).subscribe();
+      Swal.fire({
+        title: 'Aviso!',
+        text: 'O evento foi alterado com sucesso.',
+        icon: 'info',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    }
   }
 
   setView(view: CalendarView) {
@@ -168,20 +207,19 @@ export class CalendarioComponent {
   setTitleUppercase() {
 
     document.getElementById("tituloMes")?.innerText.substring(0, 1).toLocaleUpperCase();
-
   }
-  constructor(private modal: NgbModal, private eventService: EventsService, private httpClient: HttpClient) { }
 
-  ngOnInit(): void {
-    this.setTitleUppercase();
 
+
+  getEvents() {
     this.eventService.read().subscribe(res => {
       for (let index = 0; index < res.length; index++) {
         this.events.push({
-          "start": addDays(startOfDay(new Date(res[index].start,)), 1),
-          "end": addDays(startOfDay(new Date(res[index].start,)), 1),
+          "id": res[index].id,
+          "start": new Date(res[index].start),
+          "end": new Date(res[index].end),
           "title": res[index].title,
-          "color": { ...colors['yellow'] },
+          "color": colors["yellow"],
           "actions": this.actions,
           "allDay": true,
           "resizable": {
@@ -192,25 +230,13 @@ export class CalendarioComponent {
         });
       }
     })
+  }
 
-    // this.httpClient
-    //   .get('http://localhost:3301/eventos')
-    //   .subscribe((res: any) => {
-    //     console.log("passou aqui...");
-    //     console.log(res);
-    //     this.events = [{
-    //       "start": addDays(startOfDay(new Date(res[0].start,)), 1),
-    //       "end": addDays(startOfDay(new Date(res[0].start,)), 1),
-    //       "title": res[0].title,
-    //       "color": { ...colors['yellow'] },
-    //       "actions": this.actions,
-    //       "allDay": true,
-    //       "resizable": {
-    //         "beforeStart": true,
-    //         "afterEnd": true,
-    //       },
-    //       "draggable": false,
-    //     }];
-    //   });
+  constructor(private modal: NgbModal, private eventService: EventsService, private httpClient: HttpClient) { }
+
+  ngOnInit(): void {
+    this.setTitleUppercase();
+    this.getEvents();
+
   }
 }

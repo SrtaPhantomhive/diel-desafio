@@ -2,19 +2,29 @@
   "eventos": [
     {
       "id": 1,
-      "title": "faculdade 1",
-      "start": "2022-08-13",
-      "end": "2022-08-13",
-      "hours": "00:00",
-      "color": "any"
-    },
-    {
-      "id": 1,
-      "title": "faculdade 2",
-      "start": "2022-08-14",
-      "end": "2022-08-14",
-      "hours": "00:00",
-      "color": "any"
+      "start": "2022-08-15T03:00:00.000Z",
+      "end": "2022-08-16T02:59:59.999Z",
+      "title": "Taaaaatu",
+      "color": {
+        "primary": "#e3bc08",
+        "secondary": "#FDF1BA"
+      },
+      "actions": [
+        {
+          "label": "<i class=\"fas fa-fw fa-pencil-alt\"></i>",
+          "a11yLabel": "Edit"
+        },
+        {
+          "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
+          "a11yLabel": "Delete"
+        }
+      ],
+      "allDay": true,
+      "resizable": {
+        "beforeStart": true,
+        "afterEnd": true
+      },
+      "draggable": false
     }
   ]
 }

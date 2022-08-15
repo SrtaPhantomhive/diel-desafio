@@ -1,8 +1,15 @@
+export interface EventColor {
+    primary: string,
+    secondary: string
+}
+
 export interface Events {
     id?: any,
-    start: any,
-    end: any,
-    color: any,
     title: string,
-    hours: string,
+    start?: any,
+    end?: any,
+    color?: EventColor,
+    draggable?: any,
+    resizable?: any,
+    actions?: any
 }
