@@ -155,8 +155,8 @@ export class CalendarioComponent {
 
 
   saveEvent(eventToSave: any) {
-    console.log("------------------------")
-    console.log(eventToSave)
+    // console.log("------------------------")
+    // console.log(eventToSave)
     if (eventToSave.title.trim() == "") {
       Swal.fire({
         title: 'Título Inválido!',
@@ -223,7 +223,7 @@ export class CalendarioComponent {
 
   getEvents() {
     this.eventService.read().subscribe(res => {
-      console.log(res);
+      // console.log(res);
       for (let index = 0; index < res.length; index++) {
         this.events.push({
           "id": res[index].id,

@@ -27,17 +27,12 @@
     },
     {
       "id": 2,
+      "start": "2022-08-16T21:00:00.000Z",
+      "end": "2022-08-18T23:00:00.000Z",
       "title": "Consulta Médica",
-      "start": "2022-08-24T21:00:00.000Z",
-      "end": "2022-08-24T23:00:00.000Z",
       "color": {
         "primary": "#E46161",
         "secondary": "#E46161"
-      },
-      "draggable": false,
-      "resizable": {
-        "beforeStart": true,
-        "afterEnd": true
       },
       "actions": [
         {
@@ -48,7 +43,13 @@
           "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
           "a11yLabel": "Delete"
         }
-      ]
+      ],
+      "allDay": false,
+      "resizable": {
+        "beforeStart": true,
+        "afterEnd": true
+      },
+      "draggable": false
     },
     {
       "id": 3,
