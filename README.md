@@ -78,6 +78,7 @@ Validação de data:
 ![GIF3](https://i.imgur.com/2QjGwHG.gif)
 
 Visualização dos eventos no calendário:
-![GIF4](https://media2.giphy.com/media/zlLBS8hYZKsbr6z28G/giphy.gif?cid=790b7611e6434604be53b6eb78f88601eba4ba127fdabaff&rid=giphy.gif&ct=g)
+
+![GIF4](https://media2.giphy.com/media/zlLBS8hYZKsbr6z28G/giphy.gif)
 
 
