@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
+  EventEmitter,
 } from '@angular/core';
 import {
   startOfDay,
@@ -30,28 +31,35 @@ import Swal from 'sweetalert2';
 
 const colors: Record<string, EventColor> = {
   red: {
-    primary: '#ad2121',
+    primary: '#E46161',
     secondary: '#FAE3E3',
   },
-  blue: {
-    primary: '#181842',
+  orange: {
+    primary: '#F1B963',
     secondary: '#181842',
   },
   yellow: {
-    primary: '#e3bc08',
+    primary: '#F8F398',
+    secondary: '#FDF1BA',
+  },
+  green: {
+    primary: '#CBF078',
     secondary: '#FDF1BA',
   },
 };
 
-
 @Component({
   selector: 'app-calendario',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
+
+
 export class CalendarioComponent {
+
   locale: string = "pt";
+
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
@@ -67,7 +75,6 @@ export class CalendarioComponent {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
       },
     },
     {
@@ -75,7 +82,6 @@ export class CalendarioComponent {
       a11yLabel: 'Delete',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
       },
     },
   ];
@@ -117,12 +123,6 @@ export class CalendarioComponent {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
@@ -133,7 +133,7 @@ export class CalendarioComponent {
         title: 'Novo evento',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors['blue'],
+        color: colors['red'],
         draggable: false,
         resizable: {
           beforeStart: true,
@@ -150,8 +150,12 @@ export class CalendarioComponent {
       this.eventService.delete(id).subscribe();
     }
     this.events = this.events.filter((event) => event !== eventToDelete);
+    this.refresh.next();
   }
-  saveEvent(eventToSave: CalendarEvent) {
+
+
+  saveEvent(eventToSave: any) {
+    console.log("------------------------")
     console.log(eventToSave)
     if (eventToSave.title.trim() == "") {
       Swal.fire({
@@ -174,10 +178,16 @@ export class CalendarioComponent {
       });
       return;
     }
-    if (eventToSave.id == "") {
+    if (eventToSave.id == "") { //Quando for um evento novo
+      let primaryColor = (<HTMLInputElement>document.getElementById("selMarcador_")).value;
+      eventToSave.color.primary = primaryColor;
+      eventToSave.color.secondary = primaryColor;
+
       this.eventService.create(eventToSave).subscribe(res => {
         eventToSave.id = res.id;
+        window.location.reload();
       });
+
       Swal.fire({
         title: 'Sucesso!',
         text: 'O evento foi adicionado com sucesso.',
@@ -186,7 +196,12 @@ export class CalendarioComponent {
         timer: 3000
       });
     } else {
-      this.eventService.update(eventToSave.id, eventToSave).subscribe();
+      let primaryColor = (<HTMLInputElement>document.getElementById("selMarcador_" + eventToSave.id)).value;
+      eventToSave.color.primary = primaryColor;
+      eventToSave.color.secondary = primaryColor;
+
+      this.eventService.update(eventToSave.id, eventToSave).subscribe(res => {
+      });
       Swal.fire({
         title: 'Aviso!',
         text: 'O evento foi alterado com sucesso.',
@@ -195,39 +210,38 @@ export class CalendarioComponent {
         timer: 3000
       });
     }
+    this.refresh.next();
   }
-
   setView(view: CalendarView) {
     this.view = view;
   }
-
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
   setTitleUppercase() {
-
-    document.getElementById("tituloMes")?.innerText.substring(0, 1).toLocaleUpperCase();
   }
-
-
 
   getEvents() {
     this.eventService.read().subscribe(res => {
+      console.log(res);
       for (let index = 0; index < res.length; index++) {
         this.events.push({
           "id": res[index].id,
           "start": new Date(res[index].start),
           "end": new Date(res[index].end),
           "title": res[index].title,
-          "color": colors["yellow"],
+          "color": res[index].color,
           "actions": this.actions,
-          "allDay": true,
+          "allDay": false,
           "resizable": {
             "beforeStart": true,
             "afterEnd": true,
           },
           "draggable": false,
         });
+        setTimeout(() => {
+          (<HTMLInputElement>document.getElementById("selMarcador_" + (index + 1))).value = res[index].color?.primary!;
+        }, 0)
       }
     })
   }
@@ -237,6 +251,9 @@ export class CalendarioComponent {
   ngOnInit(): void {
     this.setTitleUppercase();
     this.getEvents();
+    setTimeout(() => {
+      this.refresh.next();
+    }, 500)
 
   }
 }

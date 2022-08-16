@@ -8,47 +8,54 @@
     font-size: 16px;
 }
 
+/* Altera a fonte dos títulos */
 .fonteTituloTxt {
     font-family: 'Nunito', cursive;
     font-weight: bolder;
     font-size: 26px;
 }
 
-/* Define a cor do ícone */
-.corIcones {
-    color: white;
+/* Circulos */
+.dot {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-block;
+}
+.urgente{
+    background-color: #E46161;
+}
+.alta{
+    background-color: #F1B963;
+}
+.media{
+    background-color: #F8F398;
+}
+.baixa{
+    background-color: #CBF078;
 }
 
-/* Define a cor do hover */
-.corIcone-square:hover {
-    color: #0DD2A5;
+/* BOTÕES */
+
+/* Botões sólidos */
+.btn-color {
+    background-color: #181842;
+    border-color: #181842;
 }
 
-/* Icones rodapé */
-ul.social-network {
-    list-style: none;
-    padding: 0;
+/* Botões vazados*/
+.btn-outline-color {
+    border-color: #181842;
 }
 
+/* Hover */
 .bg-btn:hover {
     background-color: #0DD2A5;
     border-color: #0DD2A5;
 }
 
 .bg-btn:active {
-    background-color: #0DD2A5;
-    border-color: #0DD2A5;
-}
-
-.borda {
-    border-radius: 20px;
-}
-
-.btn-color {
-    background-color: #181842;
-    border-color: #181842;
-}
-
-.btn-outline-color {
-    border-color: #181842;
+    background-color: #363BC4;
+    border-color: #363BC4;
 }

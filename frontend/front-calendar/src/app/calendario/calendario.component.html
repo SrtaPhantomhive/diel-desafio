@@ -2,16 +2,37 @@
 <app-navbar></app-navbar>
 
 <div class="container mb-5 mt-4 fonteTxt">
+
     <!-- Barra de adição de eventos -->
     <div class="col-md-12 text-center justify-content-center">
         <h3 class="Row mb-3 fonteTituloTxt">
             Editar Agenda
         </h3>
-        <button class="row btn btn-outline-primary float-end bg-btn btn-outline-color mb-3" (click)="addEvent()">
+        <button class="row btn btn-outline-primary float-end bg-btn btn-outline-color mb-3" (click)="addEvent()"
+            #addBtn>
             Adicionar Evento
         </button>
         <div class="clearfix"></div>
     </div>
+
+    <!-- barra de pesquisa -->
+    <!-- <div class="row mb-2 ml-2">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2 searchbg btn-outline-color" type="search"
+                placeholder="Procure um Evento!" aria-label="Search">
+            <button class="btn btn-primary bg-btn btn-color my-2 my-sm-0 " aria-hidden="true"
+                type="submit">Pesquisar</button>
+        </form>
+    </div> -->
+
+    <!-- Legenda -->
+    <div class="row d-flex justify-content-center mb-4">
+        <span class="dot urgente mr-3" data-toggle="tooltip" data-placement="top" title="Urgente"></span>
+        <span class="dot alta mr-3" data-toggle="tooltip" data-placement="top" title="Alta Prioridade"></span>
+        <span class="dot media mr-3" data-toggle="tooltip" data-placement="top" title="Média Prioridade"></span>
+        <span class="dot baixa" data-toggle="tooltip" data-placement="top" title="Baixa Prioridade"></span>
+    </div>
+
     <!-- Títulos da Tabela -->
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -25,14 +46,13 @@
                     <th>Remover</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr *ngFor="let event of events">
                     <td>
                         <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
                     </td>
                     <td>
-                        <select name="selMarcador" id="selMarcador" class="form-control">
+                        <select name="selMarcador_{{event.id}}" id="selMarcador_{{event.id}}" class="form-control">
                             <option value="#E46161">Urgente</option>
                             <option value="#F1B963">Alta</option>
                             <option value="#F8F398">Média</option>
@@ -72,29 +92,6 @@
             </tbody>
         </table>
     </div>
-    <ng-template #modalContent let-close="close">
-        <div class="modal-header">
-            <h5 class="modal-title">Event action occurred</h5>
-            <button type="button" class="close" (click)="close()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div>
-                Action:
-                <pre>{{ modalData!.action }}</pre>
-            </div>
-            <div>
-                Event:
-                <pre>{{ modalData!.event | json }}</pre>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="close()">
-                OK
-            </button>
-        </div>
-    </ng-template>
 
     <br /><br />
 
@@ -139,21 +136,19 @@
     <div [ngSwitch]="view">
         <mwl-calendar-month-view [locale]="locale" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"
             [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
-            (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (dayClicked)="dayClicked($event.day)"
             (eventTimesChanged)="eventTimesChanged($event)">
         </mwl-calendar-month-view>
         <mwl-calendar-week-view [locale]="locale" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
-            [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            [events]="events" [refresh]="refresh"
             (eventTimesChanged)="eventTimesChanged($event)">
         </mwl-calendar-week-view>
         <mwl-calendar-day-view [locale]="locale" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate"
-            [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            [events]="events" [refresh]="refresh"
             (eventTimesChanged)="eventTimesChanged($event)">
         </mwl-calendar-day-view>
     </div>
 </div>
-
-
 
 <!-- Adição de Footer -->
 <app-footer></app-footer>

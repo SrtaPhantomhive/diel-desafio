@@ -2,3 +2,12 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import 'flatpickr/dist/flatpickr.css';
+
+body{
+    overflow-x: hidden;
+}
+
+/* cor do fundo do site */
+/* body {
+    background-color: #f7f9fc;
+} */

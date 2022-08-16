@@ -1,7 +1,7 @@
 /* -------FONTES--------- */
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Nunito:ital,wght@0,200;0,700;1,200&family=Radio+Canada:wght@400;600;700&display=swap');
 
-/* altera a fonte dos textos */
+/* Configura os textos */
 .fonteTxt {
     font-family: 'Nunito', cursive;
     font-weight: lighter;
@@ -10,29 +10,27 @@
     padding-top: 25px;
 }
 
-/* Define a cor do ícone */
-.corIcones {
-    color: white;
-}
-
-/* Define a cor do hover */
-.corIcone-square:hover {
-    color: #0DD2A5;
-}
-
-/* Icones rodapé */
-ul.social-network {
-    list-style: none;
-    padding: 0;
-}
-
-.bg-btn:hover {
-    background-color: #0DD2A5;
-}
-
-/*-----------RODAPÉ------------*/
+/* CORES */
 footer {
     background: #181842;
     padding: 25px 0;
     color: #FFF;
+}
+
+/* ÍCONES */
+/* Define a cor */
+.corIcones {
+    color: white;
+}
+/* Define a cor do hover */
+.corIcone-square:hover {
+    color: #0DD2A5;
+}
+.bg-btn:hover {
+    background-color: #0DD2A5;
+}
+/* configuração do ícone */
+ul.social-network {
+    list-style: none;
+    padding: 0;
 }

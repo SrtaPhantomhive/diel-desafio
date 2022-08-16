@@ -14,7 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { registerLocaleData } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import localePt from '@angular/common/locales/pt';
+import { ListFilterPipe } from './calendario/listFolderPipe';
 
 registerLocaleData(localePt);
 
@@ -25,7 +27,8 @@ registerLocaleData(localePt);
     AppComponent,
     CalendarioComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ListFilterPipe
   ],
   exports: [CalendarioComponent],
   imports: [
@@ -41,6 +44,7 @@ registerLocaleData(localePt);
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

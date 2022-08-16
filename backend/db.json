@@ -2,12 +2,17 @@
   "eventos": [
     {
       "id": 1,
-      "start": "2022-08-15T03:00:00.000Z",
-      "end": "2022-08-16T02:59:59.999Z",
-      "title": "Taaaaatu",
+      "title": "Cinema",
+      "start": "2022-08-22T18:00:00.000Z",
+      "end": "2022-08-22T20:00:00.000Z",
       "color": {
-        "primary": "#e3bc08",
-        "secondary": "#FDF1BA"
+        "primary": "#CBF078",
+        "secondary": "#CBF078"
+      },
+      "draggable": false,
+      "resizable": {
+        "beforeStart": true,
+        "afterEnd": true
       },
       "actions": [
         {
@@ -18,13 +23,82 @@
           "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
           "a11yLabel": "Delete"
         }
-      ],
-      "allDay": true,
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Consulta Médica",
+      "start": "2022-08-24T21:00:00.000Z",
+      "end": "2022-08-24T23:00:00.000Z",
+      "color": {
+        "primary": "#E46161",
+        "secondary": "#E46161"
+      },
+      "draggable": false,
       "resizable": {
         "beforeStart": true,
         "afterEnd": true
       },
-      "draggable": false
+      "actions": [
+        {
+          "label": "<i class=\"fas fa-fw fa-pencil-alt\"></i>",
+          "a11yLabel": "Edit"
+        },
+        {
+          "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
+          "a11yLabel": "Delete"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Autoescola",
+      "start": "2022-08-17T11:30:00.000Z",
+      "end": "2022-08-17T13:00:00.000Z",
+      "color": {
+        "primary": "#F8F398",
+        "secondary": "#F8F398"
+      },
+      "draggable": false,
+      "resizable": {
+        "beforeStart": true,
+        "afterEnd": true
+      },
+      "actions": [
+        {
+          "label": "<i class=\"fas fa-fw fa-pencil-alt\"></i>",
+          "a11yLabel": "Edit"
+        },
+        {
+          "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
+          "a11yLabel": "Delete"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Casamento",
+      "start": "2022-09-10T20:00:00.000Z",
+      "end": "2022-09-11T03:00:00.000Z",
+      "color": {
+        "primary": "#F1B963",
+        "secondary": "#F1B963"
+      },
+      "draggable": false,
+      "resizable": {
+        "beforeStart": true,
+        "afterEnd": true
+      },
+      "actions": [
+        {
+          "label": "<i class=\"fas fa-fw fa-pencil-alt\"></i>",
+          "a11yLabel": "Edit"
+        },
+        {
+          "label": "<i class=\"fas fa-fw fa-trash-alt\"></i>",
+          "a11yLabel": "Delete"
+        }
+      ]
     }
   ]
 }

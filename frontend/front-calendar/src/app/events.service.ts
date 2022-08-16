@@ -11,10 +11,9 @@ export class EventsService {
   url = "http://localhost:3301/eventos"
   constructor(private http: HttpClient) { }
   create(events: Events): Observable<Events> {
-    return this.http.post<Events>(this.url, events).pipe(
-      map(obj => obj)
-      // catchError(e => return EMPTY)
-    );
+    console.log("eventsService - create");
+    console.log(events);
+    return this.http.post<Events>(this.url, events).pipe(map(obj => obj));
   }
 
   delete(id: any): Observable<Events> {
