@@ -4,7 +4,7 @@
 Conforme o desafio proposto pela empresa Diel Energia, foi elaborada uma aplicação web SPA em que fosse possível visualizar, inserir e editar tarefas do mês.
 Desta forma, desenvolvi, em conjunto, uma API Rest para guardar as informações dos eventos e comunicar com o Front-end.
 
-![Logo](https://i.imgur.com/NtkH9j7.png)
+![Logo](https://i.imgur.com/A8cgDKH.png)
 
 
 ## 🚀 Sobre mim
@@ -69,15 +69,15 @@ Inicie o servidor
 ## Demonstração
 
 Legendas e marcadores:
-![Alt Text](https://i.imgur.com/yN2SikW.gif)
+![GIF1](https://i.imgur.com/yN2SikW.gif)
 
 Métodos de adição, edição e exclusão de eventos:
-![Alt Text](https://i.imgur.com/Y33UBln.gif)
+![GIF2](https://i.imgur.com/Y33UBln.gif)
 
 Validação de data:
-![Alt Text](https://i.imgur.com/2QjGwHG.gif)
+![GIF3](https://i.imgur.com/2QjGwHG.gif)
 
 Visualização dos eventos no calendário:
-![Alt Text](https://media2.giphy.com/media/zlLBS8hYZKsbr6z28G/giphy.gif?cid=790b7611e6434604be53b6eb78f88601eba4ba127fdabaff&rid=giphy.gif&ct=g)
+![GIF4](https://media2.giphy.com/media/zlLBS8hYZKsbr6z28G/giphy.gif?cid=790b7611e6434604be53b6eb78f88601eba4ba127fdabaff&rid=giphy.gif&ct=g)
 
 
